@@ -40,13 +40,13 @@
         </div>
         <#list things as thing>
             <div class="form-check">
-                <input class="form-check-input" name = "selectedThings" value ="${thing.thingmame}" type="checkbox" <#if thing.def> checked </#if>" id="defaultCheck1">
+                <input class="form-check-input" name = "selectedThings" value ="${thing.thingmame}" type="checkbox" <#if thing.def> checked </#if>">
                 <label class="form-check-label" for="defaultCheck1">
                     ${thing.thingmame}
                 </label>
             </div>
         </#list>
-        <div class="container mt-5"/>
+        <div class="container mt-5"></div>
         <button class="btn btn-primary" type="submit">Добавить</button>
     </form>
     <#if answer??>

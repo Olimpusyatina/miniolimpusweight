@@ -29,7 +29,7 @@ self.addEventListener('fetch', event =>{
 
 async function checkCache(req){
     const cachedResponse = await caches.match(req);
-    return cachedResponse || await checkOnline(req);
+    return await checkOnline(req) || cachedResponse;
 }
 
 async function checkOnline(req){

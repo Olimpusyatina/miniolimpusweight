@@ -41,7 +41,7 @@ async function checkCache(req){
 async function checkOnline(req){
     const cache = await caches.open(dynamicCacheName);
     try {
-        const res = await fetch(req);
+        const res = fetch(req);
         await cache.put(req, res.clone());
         return res;
     } catch (error) {

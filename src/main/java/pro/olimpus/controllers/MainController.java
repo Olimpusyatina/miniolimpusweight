@@ -1,7 +1,6 @@
 package pro.olimpus.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.ansi.Ansi8BitColor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,12 +63,13 @@ public class MainController {
         model.addAttribute("endWeight", endWeight);
         model.addAttribute("startDate", startDate);
         model.addAttribute("endDate", endDate);
-        things = new HashSet<Thing>((Collection)thingRepo.findAll());
-        model.addAttribute("things", things);
+//        things = new HashSet<Thing>((Collection)thingRepo.findAll());
+        model.addAttribute("things", thingRepo.findAll());//things);
         return "main";
     }
     @GetMapping("/addThing")
-    public String addThingPage(){
+    public String addThingPage(Model model){
+        model.addAttribute("things", thingRepo.findAll());
         return "addthing";
     }
     @PostMapping("/addThing")
@@ -88,6 +88,7 @@ public class MainController {
         model.addAttribute("name", name);
         model.addAttribute("weight", weight);
         model.addAttribute("isDefault", isDefault);
+        model.addAttribute("things", thingRepo.findAll());
         return "addthing";
     }
     @GetMapping("/history")

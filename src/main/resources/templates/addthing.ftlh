@@ -1,6 +1,28 @@
 <#import "parts/common.ftlh" as c>
 
 <@c.page>
+    <table class="table  table-striped">
+        <caption>Список вещей</caption>
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">№</th>
+            <th scope="col">Название</th>
+            <th scope="col">Вес</th>
+            <th scope="col">По умолчанию</th>
+        </tr>
+        </thead>
+        <tbody>
+        <#list things as thing>
+            <tr>
+                <th scope="row"> ${thing?counter}</th>
+<#--                <td><#if weight.date??>${weight.date}<#else >Неизвестно</#if></td>-->
+                <td>${thing.thingmame}</td>
+                <td> <#if thing.weight=0>Неизвестно<#else>v</#if></td>
+                <td> <#if thing.def>Да<#else>Нет</#if></td>
+            </tr>
+        </#list>
+        </tbody>
+    </table>
     <form action="/addThing" method="post">
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Название</label>

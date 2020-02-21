@@ -1,8 +1,8 @@
-const staticCacheName = 'static-cache-v0';
-const dynamicCacheName = 'dynamic-cache-v0';
+const staticCacheName = 'static-cache-v3';
+const dynamicCacheName = 'dynamic-cache-v1';
 const staticAssets = [
      '/',
-    // '/history',
+    '/offline.html',
     './images/icons/icon-72x72.png',
     './images/icons/icon-96x96.png',
     './images/icons/icon-128x128.png',
@@ -18,33 +18,80 @@ self.addEventListener('install', async  () => {
     await cache.addAll(staticAssets);
     console.log('Success install');
 });
+
 self.addEventListener('activate', async  () => {
     const cachesKeys = await caches.keys();
-    cachesKeys.map(async key => {
+    const checkKeys = cachesKeys.map(async key => {
         if (staticCacheName !== key) {
             await caches.delete(key);
         }
     });
-    await Promise.all(cachesKeys);
+    await Promise.all(checkKeys);
     console.log('Success activation');
 });
+
 self.addEventListener('fetch', event =>{
-    console.log('Trying to fetch ${event.request.url}');
+    console.log(`Trying to fetch ${event.request.url}`);
     event.respondWith(checkCache(event.request));
 });
 
 async function checkCache(req){
     const cachedResponse = await caches.match(req);
-    return cachedResponse || await checkOnline(req);
+    return cachedResponse || checkOnline(req);
 }
 
-async function checkOnline(req){
+async function checkOnline(req) {
     const cache = await caches.open(dynamicCacheName);
     try {
-        const res = fetch(req);
+        const res = await fetch(req);
         await cache.put(req, res.clone());
         return res;
-    } catch (error) {
-        return await cache.match(req);
+    } catch (error){
+        const cachedRes = await cache.match(req);
+        if (cachedRes){
+            return cachedRes;
+        } else return await caches.match('./offline.html')
+        // return await cache.match(req);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// self.addEventListener('fetch', function (event) {
+//
+//     event.respondWith(
+//
+//         caches.open(staticCacheName).then(function (cache) {
+//             return cache.match(event.request).then(function (response) {
+//                 return response || fetch(event.request).then(function (response) {
+//                     cache.put(event.request, response.clone());
+//                     return response;
+//                 });
+//             });
+//         })
+//
+//     );
+//
+// });

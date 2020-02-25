@@ -5,7 +5,7 @@
         <caption>Список вещей</caption>
         <thead class="thead-dark">
         <tr>
-            <th scope="col">№</th>
+<#--            <th scope="col">№</th>-->
             <th scope="col">Название</th>
             <th scope="col">Вес</th>
             <th scope="col">По умолчанию</th>
@@ -14,7 +14,7 @@
         <tbody>
         <#list things as thing>
             <tr>
-                <th scope="row"> ${thing?counter}</th>
+<#--                <th scope="row"></th>-->
 <#--                <td><#if weight.date??>${weight.date}<#else >Неизвестно</#if></td>-->
                 <td>${thing.thingmame}</td>
                 <td> <#if thing.weight=0>Неизвестно<#else>v</#if></td>

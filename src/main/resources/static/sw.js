@@ -1,8 +1,8 @@
-const staticCacheName = 'static-cache-v3';
+const staticCacheName = 'static-cache-v2';
 const dynamicCacheName = 'dynamic-cache-v1';
 const staticAssets = [
      '/',
-    '/offline.html',
+    '/addData',
     './images/icons/icon-72x72.png',
     './images/icons/icon-96x96.png',
     './images/icons/icon-128x128.png',

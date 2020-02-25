@@ -1,25 +1,6 @@
 <#import "parts/common.ftlh" as c>
 <@c.page>
-<#--    <div class="form-group row">-->
-<#--        <label class="col-sm-2 col-form-label">Дата</label>-->
-<#--        <label class="col-sm-2 col-form-label">Время начала</label>-->
-<#--        <label class="col-sm-2 col-form-label">Начальный вес</label>-->
-<#--        <label class="col-sm-2 col-form-label">Время окончания</label>-->
-<#--        <label class="col-sm-2 col-form-label">Конечный вес</label>-->
-<#--        <label class="col-sm-2 col-form-label">Что было одето</label>-->
-<#--    </div>-->
-<#--    <#list weights as weight>-->
-<#--        <div class="form-group row">-->
-<#--            <#if weight.date??><label class="col-sm-2 col-form-label">${weight.date}</label><#else >Неизвестно</#if>-->
-<#--            <label class="col-sm-2 col-form-label">${weight.startTime}</label>-->
-<#--            <label class="col-sm-2 col-form-label">${weight.startWeight}</label>-->
-<#--            <label class="col-sm-2 col-form-label">${weight.endTime}</label>-->
-<#--            <label class="col-sm-2 col-form-label">${weight.endWeight}</label>-->
-<#--            <#list weight.things as thing>-->
-<#--                <label class="col-sm-2 col-form-label">${thing.thingmame}</label>-->
-<#--            </#list>-->
-<#--        </div>-->
-<#--    </#list>-->
+<div class="table-responsive">
     <table class="table  table-striped">
         <caption>История измерений</caption>
         <thead class="thead-dark">
@@ -49,4 +30,5 @@
          </#list>
         </tbody>
     </table>
+</div>
 </@c.page>

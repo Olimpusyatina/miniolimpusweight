@@ -20,6 +20,18 @@ public class OlimpusWeight {
         return date;
     }
 
+    public OlimpusWeight() {
+    }
+
+    public OlimpusWeight(String startTime, String endTime, double startWeight, double endWeight, Date date, Set<Thing> things) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.startWeight = startWeight;
+        this.endWeight = endWeight;
+        this.date = date;
+        this.things = things;
+    }
+
     public void setDate(Date date) {
         this.date = date;
     }

@@ -45,26 +45,19 @@ public class MainController {
                           @RequestParam Set<String> selectedThings,
                           Model model){
         System.out.println(selectedThings.size());
-        OlimpusWeight olimpusWeight = new OlimpusWeight();
-        olimpusWeight.setEndTime(endDate);
-        olimpusWeight.setEndWeight(endWeight);
-        olimpusWeight.setStartTime(startDate);
-        olimpusWeight.setStartWeight(startWeight);
-        java.sql.Date date1 = new java.sql.Date((new Date()).getTime());
-        olimpusWeight.setDate(date1);
         Set <Thing> things = new HashSet<>();
         for (String  selected : selectedThings){
             things.add(thingRepo.getThingByThingmame(selected));
         }
-        olimpusWeight.getThings().addAll(things);
+        OlimpusWeight olimpusWeight = new OlimpusWeight(startDate, endDate, startWeight, endWeight, new java.sql.Date((new Date()).getTime()), things);
+
         olimpusRepo.save(olimpusWeight);
         model.addAttribute("answer", "Данные внесены");
         model.addAttribute("startWeight", startWeight);
         model.addAttribute("endWeight", endWeight);
         model.addAttribute("startDate", startDate);
         model.addAttribute("endDate", endDate);
-//        things = new HashSet<Thing>((Collection)thingRepo.findAll());
-        model.addAttribute("things", thingRepo.findAll());//things);
+        model.addAttribute("things", thingRepo.findAll());
         return "main";
     }
     @GetMapping("/addThing")
